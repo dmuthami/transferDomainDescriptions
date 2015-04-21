@@ -79,8 +79,9 @@ def writeDomainDescriptionsToNewField(workspace,featureclass,domainDict,fields):
                 strr = "";
                 try:
 
-                    #update zone affiliation to the supplied value
-                    strr =str(domainDict[int(row[0])])
+                    if row[0] != None:
+                        #update zone affiliation to the supplied value
+                        strr =str(domainDict[int(row[0])])
 
                 except:
                         ## Return any Python specific errors and any error returned by the geoprocessor
@@ -156,17 +157,17 @@ def transferDomainDescriptions():
         logger.setLevel(logging.INFO)#Set the logging level
 
         #Workspace
-        _workspace = r"C:\DAVID-MUTHAMI\GIS Data\Namibia ULIMS\GIS\Datasource\Rundu\Database\rundu.gdb"
+        _workspace = r"Database Connections\gisadmin@172.24.0.47@ulims_gis.sde"
         env.workspace = _workspace
 
         ## Set overwrite in workspace to true
         env.overwriteOutput = True
 
         #Feature class used in system
-        featureClass = "rundu_Parcels"
-        oldField = "ru_zoning_id"
-        newField = "ru_zoning_id2" # ru_township_id2  ru_zoning_id2
-        domainName = "rundu_zoning" # rundu_township  rundu_zoning
+        featureClass = "ulims_gis.GISADMIN.walvis_bay_Parcels"
+        oldField = "wb_zoning_id"
+        newField = "wb_zoning_id2" # wb_township_id2  wb_zoning_id2
+        domainName = "walvis_bay_zoning" # walvis_bay_township  walvis_bay_zoning
 
         #Create a domain dictionary
         domainDict = domainDictionary(env.workspace,domainName)
